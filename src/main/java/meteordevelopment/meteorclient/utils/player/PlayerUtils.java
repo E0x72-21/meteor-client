@@ -110,11 +110,11 @@ public class PlayerUtils {
 
         boolean a = false;
         if (mc.player.input.playerInput.jump()) {
-            velY += bps;
+            velY += bps / 20;
             a = true;
         }
         if (mc.player.input.playerInput.sprint()) {
-            velY -= bps;
+            velY -= bps / 20;
             a = true;
         }
 
