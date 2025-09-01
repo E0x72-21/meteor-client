@@ -16,6 +16,7 @@ import meteordevelopment.meteorclient.systems.modules.Module;
 import meteordevelopment.meteorclient.utils.player.PlayerUtils;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.math.Vec3d;
 
 public class EntitySpeed extends Module {
@@ -57,8 +58,14 @@ public class EntitySpeed extends Module {
         if (onlyOnGround.get() && !entity.isOnGround()) return;
         if (!inWater.get() && entity.isTouchingWater()) return;
 
-        // Set horizontal velocity
+        // Set velocity
         Vec3d vel = PlayerUtils.getHorizontalVelocity(speed.get());
+        double velY = PlayerUtils.getVerticalVelocity(speed.get());
+
         ((IVec3d) event.movement).meteor$setXZ(vel.x, vel.z);
+
+        if (Registries.ENTITY_TYPE.getId(entity.getType()).getPath().equals("happy_ghast")) {
+            ((IVec3d) event.movement).meteor$setY(velY);
+        }
     }
 }
