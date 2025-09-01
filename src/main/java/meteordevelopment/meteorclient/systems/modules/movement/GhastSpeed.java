@@ -48,7 +48,7 @@ public class GhastSpeed extends Module {
     );
 
     public GhastSpeed() {
-        super(Categories.Movement, "entity-speed", "Makes you go faster when riding happy ghasts.");
+        super(Categories.Movement, "ghast-speed", "Makes you go faster when riding happy ghasts.");
     }
 
     @EventHandler
