@@ -31,6 +31,15 @@ public class EntitySpeed extends Module {
         .build()
     );
 
+    private final Setting<Double> verticalSpeed = sgGeneral.add(new DoubleSetting.Builder()
+        .name("vertical speed")
+        .description("Vertical speed in blocks per second for happy ghast.")
+        .defaultValue(5)
+        .min(0)
+        .sliderMax(50)
+        .build()
+    );
+
     private final Setting<Boolean> onlyOnGround = sgGeneral.add(new BoolSetting.Builder()
         .name("only-on-ground")
         .description("Use speed only when standing on a block.")
@@ -60,7 +69,7 @@ public class EntitySpeed extends Module {
 
         // Set velocity
         Vec3d vel = PlayerUtils.getHorizontalVelocity(speed.get());
-        double velY = PlayerUtils.getVerticalVelocity(speed.get());
+        double velY = PlayerUtils.getVerticalVelocity(verticalSpeed.get());
 
         ((IVec3d) event.movement).meteor$setXZ(vel.x, vel.z);
 
