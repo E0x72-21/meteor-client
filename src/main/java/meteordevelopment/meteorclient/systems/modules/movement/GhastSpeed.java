@@ -20,14 +20,14 @@ public class GhastSpeed extends Module {
     private final SettingGroup sgGeneral = settings.getDefaultGroup();
 
     private final Setting<GhastSpeed.VerticalMode> verticalMode = sgGeneral.add(new EnumSetting.Builder<VerticalMode>()
-        .name("vertical mode")
+        .name("vertical-mode")
         .description("The way to move up and down")
         .defaultValue(VerticalMode.BoatFly)
         .build()
     );
 
     private final Setting<Double> horizontalSpeed = sgGeneral.add(new DoubleSetting.Builder()
-        .name("horizontal speed")
+        .name("horizontal-speed")
         .description("Horizontal speed in blocks per second for happy ghast.")
         .defaultValue(10)
         .min(0)
@@ -37,7 +37,7 @@ public class GhastSpeed extends Module {
     );
 
     private final Setting<Double> verticalSpeed = sgGeneral.add(new DoubleSetting.Builder()
-        .name("vertical speed")
+        .name("vertical-speed")
         .description("Vertical speed in blocks per second for happy ghast.")
         .defaultValue(5)
         .min(0)
@@ -47,7 +47,7 @@ public class GhastSpeed extends Module {
     );
 
     private final Setting<Double> speed = sgGeneral.add(new DoubleSetting.Builder()
-        .name("Speed")
+        .name("speed")
         .description("Speed in blocks per second for happy ghast.")
         .defaultValue(10)
         .min(0)
