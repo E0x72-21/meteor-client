@@ -19,22 +19,24 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.math.Vec3d;
 
-public class EntitySpeed extends Module {
+public class GhastSpeed extends Module {
     private final SettingGroup sgGeneral = settings.getDefaultGroup();
 
-    private final Setting<Double> speed = sgGeneral.add(new DoubleSetting.Builder()
-        .name("speed")
-        .description("Horizontal speed in blocks per second.")
+    private final Setting<Double> horizontalSpeed = sgGeneral.add(new DoubleSetting.Builder()
+        .name("horizontal speed")
+        .description("Horizontal speed in blocks per second for happy ghast.")
         .defaultValue(10)
         .min(0)
         .sliderMax(50)
         .build()
     );
 
-    private final Setting<Boolean> onlyOnGround = sgGeneral.add(new BoolSetting.Builder()
-        .name("only-on-ground")
-        .description("Use speed only when standing on a block.")
-        .defaultValue(false)
+    private final Setting<Double> verticalSpeed = sgGeneral.add(new DoubleSetting.Builder()
+        .name("vertical speed")
+        .description("Vertical speed in blocks per second for happy ghast.")
+        .defaultValue(5)
+        .min(0)
+        .sliderMax(50)
         .build()
     );
 
@@ -45,23 +47,26 @@ public class EntitySpeed extends Module {
         .build()
     );
 
-    public EntitySpeed() {
-        super(Categories.Movement, "entity-speed", "Makes you go faster when riding entities. Does not work for happy ghasts.");
+    public GhastSpeed() {
+        super(Categories.Movement, "entity-speed", "Makes you go faster when riding happy ghasts.");
     }
 
     @EventHandler
     private void onLivingEntityMove(LivingEntityMoveEvent event) {
         if (event.entity.getControllingPassenger() != mc.player) return;
 
-        // Check for onlyOnGround, inWater and on happy_ghast
+        // Check for inWater
         LivingEntity entity = event.entity;
-        if (onlyOnGround.get() && !entity.isOnGround()) return;
         if (!inWater.get() && entity.isTouchingWater()) return;
-        if (Registries.ENTITY_TYPE.getId(entity.getType()).getPath().equals("happy_ghast")) return;
 
         // Set velocity
-        Vec3d vel = PlayerUtils.getHorizontalVelocity(speed.get());
+        Vec3d vel = PlayerUtils.getHorizontalVelocity(horizontalSpeed.get());
+        double velY = PlayerUtils.getVerticalVelocity(verticalSpeed.get());
 
-        ((IVec3d) event.movement).meteor$setXZ(vel.x, vel.z);
+
+        if (Registries.ENTITY_TYPE.getId(entity.getType()).getPath().equals("happy_ghast")) {
+            ((IVec3d) event.movement).meteor$setXZ(vel.x, vel.z);
+            ((IVec3d) event.movement).meteor$setY(velY);
+        }
     }
 }

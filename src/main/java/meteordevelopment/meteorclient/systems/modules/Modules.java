@@ -467,6 +467,7 @@ public class Modules extends System<Modules> {
         add(new EntitySpeed());
         add(new FastClimb());
         add(new Flight());
+        add(new GhastSpeed());
         add(new GUIMove());
         add(new HighJump());
         add(new Jesus());
