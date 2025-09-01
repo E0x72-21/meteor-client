@@ -32,7 +32,7 @@ public class GhastSpeed extends Module {
         .defaultValue(10)
         .min(0)
         .sliderMax(50)
-        .visible(() -> verticalMode.get() != VerticalMode.BoatFly)
+        .visible(() -> verticalMode.get() == VerticalMode.BoatFly)
         .build()
     );
 
@@ -42,7 +42,7 @@ public class GhastSpeed extends Module {
         .defaultValue(5)
         .min(0)
         .sliderMax(50)
-        .visible(() -> verticalMode.get() != VerticalMode.BoatFly)
+        .visible(() -> verticalMode.get() == VerticalMode.BoatFly)
         .build()
     );
 
@@ -52,7 +52,7 @@ public class GhastSpeed extends Module {
         .defaultValue(10)
         .min(0)
         .sliderMax(50)
-        .visible(() -> verticalMode.get() != VerticalMode.Pitch)
+        .visible(() -> verticalMode.get() == VerticalMode.Pitch)
         .build()
     );
 
