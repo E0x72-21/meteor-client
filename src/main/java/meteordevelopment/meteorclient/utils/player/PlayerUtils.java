@@ -109,7 +109,7 @@ public class PlayerUtils {
         double velY = 0;
 
         boolean a = false;
-        if (mc.player.input.playerInput.forward()) {
+        if (mc.player.input.playerInput.jump()) {
             velY += forward.y / 20 * bps;
             a = true;
         }
